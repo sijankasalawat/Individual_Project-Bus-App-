@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_application_1/pages/register.dart';
 import 'package:flutter_application_1/utilities/constants.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/main.dart';
 
 class Login_page extends StatefulWidget {
   const Login_page({super.key});
@@ -218,8 +220,19 @@ class _BodyState extends State<Body> {
                           ),
                         ),
                       ),
+                      
+                      // InkWell(
+                      //      onTap: () {
+                      //   Navigator.pushNamed(context, Hello.RegisterRoute);
+                      // },
+                      //   child: Text("data"),
+                    
+                      // ),
+
                       GestureDetector(
-                        onTap: () => print('Sign Up Button Pressed'),
+                       onTap: () {
+                         Navigator.pushNamed(context, Hello.RegisterRoute);
+                       },
                         child: RichText(
                           text: TextSpan(
                             children: [
@@ -244,6 +257,7 @@ class _BodyState extends State<Body> {
                         ),
                       ),
                     ],
+                    
                   ),
                 )
               ],
