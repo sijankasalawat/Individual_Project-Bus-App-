@@ -334,7 +334,7 @@ class _BodyState extends State<Body> {
                         ),
                         color: Colors.grey[900],
                         child: Text(
-                          'LOGIN',
+                          'RREGISTER',
                           style: TextStyle(
                             color: Colors.white,
                             letterSpacing: 1.5,

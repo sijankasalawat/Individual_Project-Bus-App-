@@ -31,6 +31,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+   bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size as Size;
@@ -154,30 +155,48 @@ class _BodyState extends State<Body> {
                       SizedBox(
                         height: 10.0,
                       ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        // decoration: kBoxDecorationStyle,
-                        height: 50.0,
-                        child: TextField(
-                          keyboardType: TextInputType.emailAddress,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'OpenSans',
-                          ),
-                          decoration: InputDecoration(
-                            filled: true, //<-- SEE HERE
-                            fillColor: Colors.grey[500],
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.only(top: 15.0),
-                            prefixIcon: Icon(
-                              Icons.key,
-                              color: Colors.white,
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          // decoration: kBoxDecorationStyle,
+                          height: 50.0,
+
+                          child: TextField(
+                            obscureText: _isObscure,
+                            keyboardType: TextInputType.emailAddress,
+                            style: TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1),
+                              fontFamily: 'OpenSans',
                             ),
-                            hintText: 'Enter your Password',
-                            hintStyle: kHintTextStyle,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              filled: true, //<-- SEE HERE
+                              fillColor: Colors.grey[500],
+                              contentPadding: EdgeInsets.only(top: 15.0),
+                               prefixIcon: Icon(
+                                Icons.lock,
+                                color: Colors.white,
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _isObscure ? Icons.visibility:Icons.visibility_off
+                                ),
+                                onPressed: (() {
+                                  
+                                  SetState:((){
+                                    _isObscure=!_isObscure;
+
+                                  });
+                                }),
+                                //   validator: (val) => val.length < 6 ? 'Password too short.' : null,
+                                // onSaved: (val) => _password = val,
+
+                                //   obscureText: _obscureText,
+                              ),
+                              hintText: 'Enter your Password',
+                              
+                            ),
                           ),
                         ),
-                      ),
                       Container(
                         alignment: Alignment.centerRight,
                         child: TextButton(
