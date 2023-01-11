@@ -40,6 +40,7 @@ class _BodyState extends State<Body> {
   bool invisible = true;
   bool _obscureText = true;
    bool _isObscure = true;
+   bool _changeButton = false;
   void inContact(TapDownDetails details) {
     setState(() {
       invisible = false;
@@ -160,6 +161,10 @@ class _BodyState extends State<Body> {
                                 color: Colors.white,
                               ),
                               hintText: 'Enter your Full Name',
+                              hintStyle:TextStyle(
+                              color: Colors.grey[200],
+                            fontFamily: 'OpenSans',
+                            ),
 
                               // hintStyle: kHintTextStyle,
                             ),
@@ -203,6 +208,10 @@ class _BodyState extends State<Body> {
                                 color: Colors.white,
                               ),
                               hintText: 'Enter your Email',
+                              hintStyle:TextStyle(
+                              color: Colors.grey[200],
+                            fontFamily: 'OpenSans',
+                            ),
                             ),
                           ),
                         ),
@@ -244,6 +253,10 @@ class _BodyState extends State<Body> {
                                 color: Colors.white,
                               ),
                               hintText: 'Enter your Phone Number',
+                              hintStyle:TextStyle(
+                              color: Colors.grey[200],
+                            fontFamily: 'OpenSans',
+                            ),
                               // hintStyle: kHintTextStyle,
                             ),
                           ),
@@ -303,6 +316,10 @@ class _BodyState extends State<Body> {
                                 //   obscureText: _obscureText,
                               ),
                               hintText: 'Enter your Password',
+                              hintStyle:TextStyle(
+                              color: Colors.grey[200],
+                            fontFamily: 'OpenSans',
+                            ),
                             ),
                           ),
                         ),
@@ -322,25 +339,35 @@ class _BodyState extends State<Body> {
                   Padding(
                     padding:
                         const EdgeInsets.only(right: 30, left: 30, top: 30),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 25.0),
-                      width: double.infinity,
-                      child: MaterialButton(
-                        elevation: 5.0,
-                        onPressed: () => print('Login Button Pressed'),
-                        padding: EdgeInsets.all(15.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        color: Colors.grey[900],
-                        child: Text(
-                          'RREGISTER',
-                          style: TextStyle(
-                            color: Colors.white,
-                            letterSpacing: 1.5,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'OpenSans',
+                    child: InkWell(
+                      onTap: (() {
+                        setState(() {
+                          _changeButton=true;
+                        });
+                      }),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 25.0),
+                        width: double.infinity,
+                        child: MaterialButton(
+                          elevation: 5.0,
+                          onPressed: () => print('register Button Pressed'),
+                          padding: EdgeInsets.all(15.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            
+                          ),
+                          
+                          color: Colors.grey[900],
+                          child: Text(
+                            'RREGISTER',
+                            style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 1.5,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'OpenSans',
+                            ),
+                            
                           ),
                         ),
                       ),

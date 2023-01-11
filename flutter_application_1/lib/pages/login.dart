@@ -32,6 +32,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
    bool _isObscure = true;
+   bool _changeButton =false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size as Size;
@@ -119,10 +120,15 @@ class _BodyState extends State<Body> {
                         // decoration: kBoxDecorationStyle,
                         height: 50.0,
 
-                        child: TextField(
+                        child: TextFormField(
+                          validator: ((value) {
+                            if (value==null || value.isEmpty){
+                              return'Please enter your email';
+                            }
+                          }),
                           keyboardType: TextInputType.emailAddress,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontFamily: 'OpenSans',
                           ),
                           decoration: InputDecoration(
@@ -135,7 +141,10 @@ class _BodyState extends State<Body> {
                               color: Colors.white,
                             ),
                             hintText: 'Enter your Email',
-                            hintStyle: kHintTextStyle,
+                            hintStyle:TextStyle(
+                              color: Colors.grey[200],
+                            fontFamily: 'OpenSans',
+                            ),
                           ),
                         ),
                       ),
@@ -193,6 +202,10 @@ class _BodyState extends State<Body> {
                                 //   obscureText: _obscureText,
                               ),
                               hintText: 'Enter your Password',
+                              hintStyle:TextStyle(
+                              color: Colors.grey[200],
+                            fontFamily: 'OpenSans',
+                            ),
                               
                             ),
                           ),
@@ -218,10 +231,16 @@ class _BodyState extends State<Body> {
                       ),
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 25.0),
+                        
                         width: double.infinity,
                         child: MaterialButton(
                           elevation: 5.0,
-                          onPressed: () => print('Login Button Pressed'),
+                          onPressed: () {
+                            // setState(() {
+                            //   _changeButton=true;
+                            // });
+                            // Navigator.pushNamed(context, Hello.HomeRoute);
+                          },
                           padding: EdgeInsets.all(15.0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
