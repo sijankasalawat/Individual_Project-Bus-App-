@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "334770965308",
+    "project_id": "busapp-ceda5",
+    "storage_bucket": "busapp-ceda5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334770965308:android:d667596b5160bbbbf32c39",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "334770965308-kcrm52o79l10gkgrn5rghiq7rlj2keu7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1yNYA0qCs_AL2FkFCI8wAB6x-Xqh4sCQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "334770965308-kcrm52o79l10gkgrn5rghiq7rlj2keu7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
