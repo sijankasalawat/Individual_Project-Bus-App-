@@ -71,7 +71,7 @@ class _BodyState extends State<Body> {
           Container(
             margin: EdgeInsets.only(top: size.height * 0.0),
             width: 500,
-            height: size.height * 0.88,
+            height: size.height * 1.1,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topRight,

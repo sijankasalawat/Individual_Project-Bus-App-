@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/homepage.dart';
+import 'package:flutter_application_1/home_page/Home_page.dart';
 import 'package:flutter_application_1/auth/login.dart';
 import 'package:flutter_application_1/auth/register.dart';
 
@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget {
         "/":(context) => Login_page(),
         Hello.LoginRoute:(context) => Login_page(),
         Hello.RegisterRoute:(context) => Register_Page(),
-        Hello.HomeRoute:((context) => Home_Page()),
+        Hello.HomeRoute:((context) => Homepage()),
+      
         
 
       
@@ -38,4 +39,7 @@ class Hello{
   static String LoginRoute="/Login";
   static String RegisterRoute="/Register";
   static String HomeRoute="/Home_Page";
+  
+
+
 }

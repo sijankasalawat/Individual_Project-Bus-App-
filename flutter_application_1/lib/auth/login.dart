@@ -37,7 +37,7 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size as Size;
     return SingleChildScrollView(
-      // scrollDirection: Axis.vertical,
+      scrollDirection: Axis.vertical,
       child: Column(
         children: <Widget>[
           Row(
@@ -54,8 +54,8 @@ class _BodyState extends State<Body> {
             ],
           ),
           Container(
-            margin: EdgeInsets.only(top: size.height * 0.09),
-            height: size.height * 0.65,
+            margin: EdgeInsets.only(top: size.height * 0.1),
+            height: size.height * 0.85,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topRight,
@@ -236,6 +236,8 @@ class _BodyState extends State<Body> {
                         child: MaterialButton(
                           elevation: 5.0,
                           onPressed: () {
+                            Navigator.pushNamed(context, Hello.HomeRoute);
+
                             // setState(() {
                             //   _changeButton=true;
                             // });
