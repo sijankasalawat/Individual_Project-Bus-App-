@@ -227,9 +227,18 @@ class _BodyState extends State<Body> {
                       children: <Widget>[
                         Text('PHONE NUMBER',
                             style:
-                                TextStyle(color: Colors.grey[600], fontSize: 18)
+                                TextStyle(color: Colors.grey[600], fontSize: 18),
+                                 validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Phone Number cannot be empty";
+                              } else if (value.length < 10) {
+                                return "Please enter a valid phone number";
+                              }
+                              return null;
+                            },
                             // style: kLabelStyle,
                             ),
+                           
                         SizedBox(
                           height: 10.0,
                         ),
