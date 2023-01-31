@@ -16,14 +16,14 @@ class _Register_PageState extends State<Register_Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 253, 238, 24),
+        backgroundColor: Color.fromARGB(255, 15, 15, 15),
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.grey[900]),
+          icon: Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 255, 255)),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 253, 238, 24),
+      backgroundColor: Color.fromARGB(255, 15, 15, 15),
       body: Body(),
     );
   }
@@ -77,8 +77,8 @@ class _BodyState extends State<Body> {
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [
-                    Color.fromARGB(255, 255, 255, 255),
-                    Color.fromARGB(255, 255, 255, 255),
+                    Color.fromARGB(255, 30, 30, 30),
+                    Color.fromARGB(255, 30, 30, 30),
                   ],
                 ),
                 borderRadius: BorderRadius.only(
@@ -94,7 +94,7 @@ class _BodyState extends State<Body> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 35,
-                        color: Colors.black),
+                        color: Color.fromARGB(255, 255, 255, 255)),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
@@ -108,7 +108,7 @@ class _BodyState extends State<Body> {
                             TextSpan(
                               text: 'Already Registered? ',
                               style: TextStyle(
-                                color: Colors.grey[900],
+                                color: Color.fromARGB(255, 170, 170, 170),
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -153,7 +153,8 @@ class _BodyState extends State<Body> {
                             ),
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              filled: true, //<-- SEE HERE
+                              filled: true, 
+                              //<-- SEE HERE
                               fillColor: Colors.grey[500],
                               contentPadding: EdgeInsets.only(top: 15.0),
                               prefixIcon: Icon(
@@ -236,6 +237,7 @@ class _BodyState extends State<Body> {
                           alignment: Alignment.centerLeft,
                           // decoration: kBoxDecorationStyle,
                           height: 50.0,
+                          
 
                           child: TextField(
                             keyboardType: TextInputType.emailAddress,
@@ -244,7 +246,8 @@ class _BodyState extends State<Body> {
                               fontFamily: 'OpenSans',
                             ),
                             decoration: InputDecoration(
-                              border: InputBorder.none,
+                              // border: InputBorder.none,
+                              
                               filled: true, //<-- SEE HERE
                               fillColor: Colors.grey[500],
                               contentPadding: EdgeInsets.only(top: 15.0),
@@ -347,6 +350,7 @@ class _BodyState extends State<Body> {
                       }),
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 25.0),
+                        
                         width: double.infinity,
                         child: MaterialButton(
                           elevation: 5.0,
@@ -357,7 +361,7 @@ class _BodyState extends State<Body> {
                             
                           ),
                           
-                          color: Colors.grey[900],
+                          color: Color.fromARGB(255, 50, 50, 50),
                           child: Text(
                             'RREGISTER',
                             style: TextStyle(

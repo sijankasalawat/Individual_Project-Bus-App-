@@ -23,6 +23,7 @@ class UserModel {
     String? username;
     String? phone;
 
+
     factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         userId: json["user_id"],
         fcmToken: json["fcm_token"],

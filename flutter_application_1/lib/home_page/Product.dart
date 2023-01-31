@@ -1,9 +1,12 @@
 // import 'package:flutter/animation.dart';
 
+import 'package:flutter/animation.dart';
+import 'package:flutter/material.dart';
+// product kathmandu/pokhara
 class Product {
   final String  from, to, time;
   final int  price, id ,no;
-  // final Color color;
+  final Color color;
   
   Product(
       {required this.from,
@@ -11,7 +14,7 @@ class Product {
       required this.time,
       required this.to,
       required this.no,
-      // required this.color,
+      required this.color,
       required this.id,
       required this.price});
 }
@@ -22,37 +25,131 @@ List<Product> product1=[
     price: 2000, 
     from: "Kathmandu ",
     to:"Pokhara",
-    time:"11:am"
+    time:"11:am",
+    color: Color.fromARGB(255, 177, 184, 190),
     
 
   ),
   Product(
-    id: 2,
-    no:20,
+    id: 1,
+    no:10,
     price: 2000, 
-    from: "Kathmandu",
+    from: "Kathmandu ",
     to:"Pokhara",
-    time:"11:am"
+    time:"11:am",
+    color: Color.fromARGB(255, 177, 184, 190),
     
 
   ),
-    Product(
-    id: 3,
-    no:30,
+   Product(
+    id: 1,
+    no:10,
     price: 2000, 
-    from: "Kathmandu",
+    from: "Kathmandu ",
     to:"Pokhara",
-    time:"11:am"
+    time:"11:am",
+    color: Color.fromARGB(255, 177, 184, 190),
     
 
   ),
-    Product(
-    id: 4,
-    no:40,
+  
+];
+List<Product> product2=[
+ Product(
+    id: 1,
+    no:10,
     price: 2000, 
-    from: "Kathmandu",
+    from: "pokhara  ",
+    to:"kathmandu",
+    time:"11:am",
+    color: Color.fromARGB(255, 177, 184, 190),
+    
+
+  ),
+  Product(
+    id: 1,
+    no:10,
+    price: 2000, 
+    from: "pokhara  ",
+    to:"kathmandu",
+    time:"11:am",
+    color: Color.fromARGB(255, 177, 184, 190),
+    
+
+  ),
+];
+// product2 kathmandu/chitwan
+class Product2{
+   final String  from, to, time;
+  final int  price, id ,no;
+  final Color color; 
+
+  Product2(
+      {required this.from,
+      // required this.image,
+      required this.time,
+      required this.to,
+      required this.no,
+      required this.color,
+      required this.id,
+      required this.price});
+}
+List<Product2> product3=[
+  Product2(
+    id: 1,
+    no:10,
+    price: 2000, 
+    from: "Kathmandu ",
     to:"Pokhara",
-    time:"11:am"
+    time:"11:am",
+    color: Color.fromARGB(255, 177, 184, 190),
+    
+
+  ),
+  Product2(
+    id: 1,
+    no:10,
+    price: 2000, 
+    from: "Kathmandu ",
+    to:"Pokhara",
+    time:"11:am",
+    color: Color.fromARGB(255, 177, 184, 190),
+    
+
+  ),
+   Product2(
+    id: 1,
+    no:10,
+    price: 2000, 
+    from: "Kathmandu ",
+    to:"Pokhara",
+    time:"11:am",
+    color: Color.fromARGB(255, 177, 184, 190),
+    
+
+  ),
+  
+];
+List<Product2> product4=[
+ Product2(
+    id: 1,
+    no:10,
+    price: 2000, 
+    from: "pokhara  ",
+    to:"kathmandu",
+    time:"11:am",
+    color: Color.fromARGB(255, 177, 184, 190),
+    
+
+  ),
+  Product2(
+    id: 1,
+    no:10,
+    price: 2000, 
+    from: "pokhara  ",
+    to:"kathmandu",
+    time:"11:am",
+    color: Color.fromARGB(255, 177, 184, 190),
     
 
   ),

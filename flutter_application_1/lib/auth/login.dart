@@ -17,7 +17,7 @@ class _Login_pageState extends State<Login_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 253, 238, 24),
+      backgroundColor: Color.fromARGB(255, 15, 15, 15),
       body: Body(),
     );
   }
@@ -31,6 +31,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  
    bool _isObscure = true;
    bool _changeButton =false;
   @override
@@ -61,8 +62,8 @@ class _BodyState extends State<Body> {
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [
-                    Color.fromARGB(255, 255, 255, 255),
-                    Color.fromARGB(255, 255, 255, 255),
+                    Color.fromARGB(255, 30, 30, 30),
+                    Color.fromARGB(255, 30, 30, 30),
                   ],
                 ),
                 borderRadius: BorderRadius.only(
@@ -82,7 +83,7 @@ class _BodyState extends State<Body> {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 35,
-                            color: Colors.black),
+                            color: Color.fromARGB(255, 255, 255, 255)),
                       ),
                     ],
                   ),
@@ -95,7 +96,7 @@ class _BodyState extends State<Body> {
                       Text(
                         "sign in to continue.",
                         style: TextStyle(
-                          color: Colors.grey[600],
+                          color: Color.fromARGB(255, 144, 144, 144),
                           fontSize: 18,
                         ),
                       ),
@@ -109,18 +110,24 @@ class _BodyState extends State<Body> {
                     children: <Widget>[
                       Text('EMAIL',
                           style:
-                              TextStyle(color: Colors.grey[600], fontSize: 18)
+                              TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 18)
                           // style: kLabelStyle,
                           ),
                       SizedBox(
                         height: 10.0,
+                        
+               
                       ),
+                      
                       Container(
                         alignment: Alignment.centerLeft,
                         // decoration: kBoxDecorationStyle,
                         height: 50.0,
+             
+               
 
                         child: TextFormField(
+                          
                           validator: ((value) {
                             if (value==null || value.isEmpty){
                               return'Please enter your email';
@@ -142,7 +149,7 @@ class _BodyState extends State<Body> {
                             ),
                             hintText: 'Enter your Email',
                             hintStyle:TextStyle(
-                              color: Colors.grey[200],
+                              color: Color.fromARGB(255, 255, 255, 255),
                             fontFamily: 'OpenSans',
                             ),
                           ),
@@ -158,7 +165,7 @@ class _BodyState extends State<Body> {
                     children: <Widget>[
                       Text('PASSWORD',
                           style:
-                              TextStyle(color: Colors.grey[600], fontSize: 18)
+                              TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 18)
                           // style: kLabelStyle,
                           ),
                       SizedBox(
@@ -168,6 +175,7 @@ class _BodyState extends State<Body> {
                           alignment: Alignment.centerLeft,
                           // decoration: kBoxDecorationStyle,
                           height: 50.0,
+                          
 
                           child: TextField(
                             obscureText: _isObscure,
@@ -203,7 +211,7 @@ class _BodyState extends State<Body> {
                               ),
                               hintText: 'Enter your Password',
                               hintStyle:TextStyle(
-                              color: Colors.grey[200],
+                              color: Color.fromARGB(255, 255, 255, 255),
                             fontFamily: 'OpenSans',
                             ),
                               
@@ -221,7 +229,7 @@ class _BodyState extends State<Body> {
                           child: Text(
                             'Forgot Password?',
                             style: TextStyle(
-                              color: Colors.grey[600],
+                              color: Color.fromARGB(255, 190, 190, 190),
                               fontSize:15.0,
                             ),
 
@@ -247,7 +255,7 @@ class _BodyState extends State<Body> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           ),
-                          color: Colors.grey[900],
+                          color: Color.fromARGB(255, 50, 50, 50),
                           child: Text(
                             'LOGIN',
                             style: TextStyle(
@@ -279,7 +287,7 @@ class _BodyState extends State<Body> {
                               TextSpan(
                                 text: 'Don\'t have an Account? ',
                                 style: TextStyle(
-                                  color:Colors.grey[900] ,
+                                  color:Color.fromARGB(255, 170, 170, 170) ,
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w400,
                                 ),
@@ -287,7 +295,7 @@ class _BodyState extends State<Body> {
                               TextSpan(
                                 text: 'Sign Up',
                                 style: TextStyle(
-                                  color: Colors.grey[500],
+                                  color: Color.fromARGB(255, 190, 190, 190),
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,
                                 ),

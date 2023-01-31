@@ -4,12 +4,16 @@ import 'dart:math';
 import 'package:animated_search_bar/animated_search_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
+// import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/home_page/Product.dart';
 import 'package:flutter_application_1/utilities/constants.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'ItemCart.dart';
+//Global variable for the notification plugin
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -19,22 +23,85 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+  
   get _handleNavigationChange => null;
+   void showNotification() async {
+    AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+      "channelId",
+      "channelName",
+      importance: Importance.max,
+      priority: Priority.max,
+      ticker: "test",
+      enableLights: true,
+      enableVibration: true,
+    );
+
+    //for ios
+    DarwinNotificationDetails darwinNotificationDetails =
+        DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    NotificationDetails notificationDetails = NotificationDetails(
+      android: androidNotificationDetails,
+      iOS: darwinNotificationDetails,
+    );
+
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      "Bus Application",
+      "Welcome to Bus App",
+      notificationDetails,
+    );
+
+    DateTime time = DateTime.now().add(Duration(seconds: 10));
+    //time based notification
+    await flutterLocalNotificationsPlugin.schedule(
+        0, "Family pack", "Ticket offer", time, notificationDetails,
+        payload: "ok");
+  }
+
+  // //App launch notification
+  // void checkForNotification() async {
+  //   NotificationAppLaunchDetails? details =
+  //       await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+  //   if (details != null) {
+  //     if (details.didNotificationLaunchApp) {
+  //       NotificationResponse? response = details.notificationResponse;
+  //       if (response != null) {
+  //         String? payload = response.payload;
+  //         // log("Noitification payload: $payload");
+  //       }
+  //     }
+  //   }
+  // }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   checkForNotification();
+  //   showNotification();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: Color.fromARGB(255, 253, 238, 24),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
-        leading: GestureDetector(
-          onTap: () {/* Write listener code here */},
-          child: Icon(
+       leading: IconButton(
+          icon: Icon(
             Icons.menu,
             color: Colors.black,
-            size: 30, // add custom icons also
           ),
+          onPressed: () {
+            _key.currentState?.openDrawer();
+          },
         ),
         actions: <Widget>[
           Padding(
@@ -60,51 +127,48 @@ class _HomepageState extends State<Homepage> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: <Widget>[
+            Body0(),
             Body(),
             Body2(),
             Body3(),
           ],
         ),
       ),
-      bottomNavigationBar: FluidNavBar(
-        // (1)
-        icons: [
-          // (2)
-          FluidNavBarIcon(
-            icon: Icons.home,
-          ),
-
-          FluidNavBarIcon(icon: Icons.message),
-          // FluidNavBarIcon(icon: Icons.home), // (3)
-          FluidNavBarIcon(icon: Icons.notifications),
-        ],
-        onChange: _handleNavigationChange,
-        style: FluidNavBarStyle(
-            barBackgroundColor: Color.fromARGB(255, 253, 238, 24),
-            iconBackgroundColor: Color.fromARGB(255, 0, 0, 0),
-            iconSelectedForegroundColor: Color.fromARGB(255, 255, 255, 255),
-            iconUnselectedForegroundColor: Colors.grey),
-        // onChange: _handleNavigationChange,                  // (4)
-      ),
-      // bottomNavigationBar: CurvedNavigationBar(
-      //   backgroundColor: Colors.red,
-      //   items: <Widget>[
-      //     Icon(Icons.home),
-      //     Icon(Icons.chat),
-      //     Icon(Icons.shopping_cart),
-      //     Icon(
-      //       Icons.account_box,
-      //       size: 30,
+      // bottomNavigationBar: FluidNavBar(
+      //   // (1)
+      //   icons: [
+      //     // (2)
+      //     FluidNavBarIcon(
+      //       icon: Icons.home,
       //     ),
+
+      //     FluidNavBarIcon(icon: Icons.message),
+      //     // FluidNavBarIcon(icon: Icons.home), // (3)
+      //     FluidNavBarIcon(icon: Icons.notifications),
       //   ],
-      //   onTap: (index) {
-      //     //Handle button ta
-      //   },
+      //   onChange: _handleNavigationChange,
+      //   style: FluidNavBarStyle(
+      //       barBackgroundColor: Color.fromARGB(255, 253, 238, 24),
+      //       iconBackgroundColor: Color.fromARGB(255, 0, 0, 0),
+      //       iconSelectedForegroundColor: Color.fromARGB(255, 255, 255, 255),
+      //       iconUnselectedForegroundColor: Colors.grey),
+      //   // onChange: _handleNavigationChange,                  // (4)
       // ),
+     
     );
   }
 }
 
+class Body0 extends StatelessWidget {
+  const Body0({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+    );
+  }
+}
 class Body extends StatefulWidget {
   const Body({super.key});
 
@@ -251,6 +315,7 @@ class _Body2State extends State<Body2> {
               // ignore: prefer_const_constructors
               Expanded(
                   child: GridView.builder(
+                    
                 itemCount: product1.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 1,

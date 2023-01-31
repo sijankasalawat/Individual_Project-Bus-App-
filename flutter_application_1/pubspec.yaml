@@ -43,6 +43,7 @@ dependencies:
   fluid_bottom_nav_bar: ^1.4.0
   fsearch: ^2.0.0
   animated_search_bar: ^2.3.0
+  flutter_local_notifications: ^13.0.0
  
 
 
