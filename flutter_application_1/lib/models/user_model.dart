@@ -12,38 +12,52 @@ class UserModel {
     UserModel({
         this.userId,
         this.fcmToken,
-        this.name,
-        this.username,
+        this.fullname,
+        this.email,
         this.phone,
+        this.password,
     });
 
     String? userId;
     String? fcmToken;
-    String? name;
-    String? username;
+    String? fullname;
+    String? email;
     String? phone;
+    String? password;
 
 
     factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         userId: json["user_id"],
         fcmToken: json["fcm_token"],
-        name: json["name"],
-        username: json["username"],
+        fullname: json["name"],
+        email: json["email"],
         phone: json["phone"],
+        password: json["password"],
+
     );
+
+  get username => null;
+
+  // get password => null;
+
+  String? get id => null;
+
+  set fcm(String fcm) {}
 
     Map<String, dynamic> toJson() => {
         "user_id": userId,
         "fcm_token": fcmToken,
-        "name": name,
-        "username": username,
+        "fullname": fullname,
+        "email": email,
         "phone": phone,
+        "password":password
     };
      factory UserModel.fromFirebaseSnapshot(Map<String, dynamic> json) => UserModel(
         userId: json["user_id"],
         fcmToken: json["fcm_token"],
-        name: json["name"],
-        username: json["username"],
+        fullname: json["fullname"],
+        email: json["email"],
         phone: json["phone"],
+        password: json['password']
     );
 }

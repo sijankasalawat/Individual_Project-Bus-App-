@@ -3,15 +3,62 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import '../main.dart';
+import '../models/user_model.dart';
+import '../viewmodels/auth_viewmodel.dart';
+import '../viewmodels/global_ui_viewmodel.dart';
 
 class Register_Page extends StatefulWidget {
   const Register_Page({super.key});
+  
+  
 
   @override
   State<Register_Page> createState() => _Register_PageState();
 }
 
 class _Register_PageState extends State<Register_Page> {
+  
+    TextEditingController name = new TextEditingController();
+ 
+  TextEditingController password = new TextEditingController();
+  TextEditingController email = new TextEditingController();
+  TextEditingController number = new TextEditingController();
+
+  bool _obscureTextPassword = true;
+  bool _obscureTextPasswordConfirm = true;
+
+  late GlobalUIViewModel _ui;
+  late AuthViewModel _authViewModel;
+    void register() async{
+    if(_formKey.currentState == null || !_formKey.currentState!.validate()){
+      return;
+    }
+    _ui.loadState(true);
+    try{
+      await _authViewModel.register(
+          UserModel(
+              email: email.text,
+              password:password.text,
+            phone:number.text,
+            fullname: name.text,
+           
+          )).then((value) {
+
+            // NotificationService.display(
+            //   title: "Welcome to this app",
+            //   body: "Hello ${_authViewModel.loggedInUser?.fullName},\n Thank you for registering in this application.",
+            // );
+            // Navigator.of(context).pushReplacementNamed("/dashboard");
+      })
+          .catchError((e){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message.toString())));
+      });
+    }catch(err){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(err.toString())));
+    }
+    _ui.loadState(false);
+  }
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -228,14 +275,7 @@ class _BodyState extends State<Body> {
                         Text('PHONE NUMBER',
                             style:
                                 TextStyle(color: Colors.grey[600], fontSize: 18),
-                                 validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Phone Number cannot be empty";
-                              } else if (value.length < 10) {
-                                return "Please enter a valid phone number";
-                              }
-                              return null;
-                            },
+                           
                             // style: kLabelStyle,
                             ),
                            
@@ -269,8 +309,18 @@ class _BodyState extends State<Body> {
                               color: Colors.grey[200],
                             fontFamily: 'OpenSans',
                             ),
+                              //
                               // hintStyle: kHintTextStyle,
                             ),
+                            //       validator: (value) {
+                            //   if (value!.isEmpty) {
+                            //     return "Phone Number cannot be empty";
+                            //   } else if (value.length < 10) {
+                            //     return "Please enter a valid phone number";
+                            //   }
+                            //   return null;
+                            // },
+                            
                           ),
                         ),
                       ],
