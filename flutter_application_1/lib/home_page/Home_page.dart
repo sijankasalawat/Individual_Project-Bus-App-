@@ -90,9 +90,10 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       backgroundColor: Image.asset('assets/images/highway.jpg').color,
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: Colors.transparent,
         elevation: 0,
        leading: IconButton(
           icon: Icon(
