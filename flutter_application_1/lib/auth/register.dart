@@ -18,37 +18,42 @@ class Register_Page extends StatefulWidget {
 
 class _Register_PageState extends State<Register_Page> {
   
-    TextEditingController name = new TextEditingController();
+    TextEditingController fullname = new TextEditingController();
  
   TextEditingController password = new TextEditingController();
   TextEditingController email = new TextEditingController();
-  TextEditingController number = new TextEditingController();
+  TextEditingController phonenumber = new TextEditingController();
 
   bool _obscureTextPassword = true;
   bool _obscureTextPasswordConfirm = true;
 
   late GlobalUIViewModel _ui;
   late AuthViewModel _authViewModel;
-    void register() async{
+  
+  get NotificationService => null;
+
+  void register() async{
     if(_formKey.currentState == null || !_formKey.currentState!.validate()){
       return;
     }
     _ui.loadState(true);
     try{
+      
+    
+   
       await _authViewModel.register(
           UserModel(
-              email: email.text,
-              password:password.text,
-            phone:number.text,
-            fullname: name.text,
-           
+           fullname: fullname.text,
+           email: email.text,
+           phone: phonenumber.text,
+           password: password.text,
           )).then((value) {
 
-            // NotificationService.display(
-            //   title: "Welcome to this app",
-            //   body: "Hello ${_authViewModel.loggedInUser?.fullName},\n Thank you for registering in this application.",
-            // );
-            // Navigator.of(context).pushReplacementNamed("/dashboard");
+            NotificationService.display(
+              title: "Welcome to this app",
+              body: "Hello ${_authViewModel.loggedInUser?.fullname},\n Thank you for registering in this application.",
+            );
+            Navigator.of(context).pushReplacementNamed("/dashboard");
       })
           .catchError((e){
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message.toString())));
@@ -58,6 +63,7 @@ class _Register_PageState extends State<Register_Page> {
     }
     _ui.loadState(false);
   }
+   
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -124,8 +130,8 @@ class _BodyState extends State<Body> {
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [
-                    Color.fromARGB(255, 30, 30, 30),
-                    Color.fromARGB(255, 30, 30, 30),
+                    Color.fromARGB(255, 255, 255, 255),
+                    Color.fromARGB(255, 181, 181, 181),
                   ],
                 ),
                 borderRadius: BorderRadius.only(
@@ -192,7 +198,7 @@ class _BodyState extends State<Body> {
                           // decoration: kBoxDecorationStyle,
                           height: 50.0,
 
-                          child: TextField(
+                          child: TextFormField(
                             keyboardType: TextInputType.emailAddress,
                             style: TextStyle(
                               color: Color.fromARGB(255, 255, 255, 255),
@@ -202,6 +208,7 @@ class _BodyState extends State<Body> {
                               border: InputBorder.none,
                               filled: true, 
                               //<-- SEE HERE
+                          
                               fillColor: Colors.grey[500],
                               contentPadding: EdgeInsets.only(top: 15.0),
                               prefixIcon: Icon(
@@ -212,10 +219,20 @@ class _BodyState extends State<Body> {
                               hintStyle:TextStyle(
                               color: Colors.grey[200],
                             fontFamily: 'OpenSans',
+                            
                             ),
+
+                            
 
                               // hintStyle: kHintTextStyle,
                             ),
+                                 validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Full Name cannot be empty";
+                              }
+
+                              return null;
+                            },
                           ),
                         ),
                       ],
@@ -240,7 +257,7 @@ class _BodyState extends State<Body> {
                           // decoration: kBoxDecorationStyle,
                           height: 50.0,
 
-                          child: TextField(
+                          child: TextFormField(
                             keyboardType: TextInputType.emailAddress,
                             style: TextStyle(
                               color: Colors.white,
@@ -261,6 +278,14 @@ class _BodyState extends State<Body> {
                             fontFamily: 'OpenSans',
                             ),
                             ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Email cannot be empty";
+                              } else if (!value.contains("@")) {
+                                return "Please enter a valid email address";
+                              }
+                              return null;
+                            },
                           ),
                         ),
                       ],
@@ -288,7 +313,7 @@ class _BodyState extends State<Body> {
                           height: 50.0,
                           
 
-                          child: TextField(
+                          child: TextFormField(
                             keyboardType: TextInputType.emailAddress,
                             style: TextStyle(
                               color: Colors.white,
@@ -312,14 +337,14 @@ class _BodyState extends State<Body> {
                               //
                               // hintStyle: kHintTextStyle,
                             ),
-                            //       validator: (value) {
-                            //   if (value!.isEmpty) {
-                            //     return "Phone Number cannot be empty";
-                            //   } else if (value.length < 10) {
-                            //     return "Please enter a valid phone number";
-                            //   }
-                            //   return null;
-                            // },
+                                  validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Phone Number cannot be empty";
+                              } else if (value.length == 10) {
+                                return "Please enter a valid phone number";
+                              }
+                              return null;
+                            },
                             
                           ),
                         ),
@@ -345,7 +370,7 @@ class _BodyState extends State<Body> {
                           // decoration: kBoxDecorationStyle,
                           height: 50.0,
 
-                          child: TextField(
+                          child: TextFormField(
                             obscureText: _isObscure,
                             keyboardType: TextInputType.emailAddress,
                             style: TextStyle(
@@ -383,6 +408,14 @@ class _BodyState extends State<Body> {
                             fontFamily: 'OpenSans',
                             ),
                             ),
+                              validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Password cannot be empty";
+                              } else if (value.length < 6) {
+                                return "Password length should be atleast 6 charachter";
+                              }
+                              return null;
+                            },
                           ),
                         ),
                         // GestureDetector(
@@ -401,27 +434,28 @@ class _BodyState extends State<Body> {
                   Padding(
                     padding:
                         const EdgeInsets.only(right: 30, left: 30, top: 30),
-                    child: InkWell(
-                      onTap: (() {
-                        setState(() {
-                          _changeButton=true;
-                        });
-                      }),
+     
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 25.0),
                         
                         width: double.infinity,
-                        child: MaterialButton(
+                        child: FloatingActionButton.extended(
                           elevation: 5.0,
-                          onPressed: () => print('register Button Pressed'),
-                          padding: EdgeInsets.all(15.0),
+                          onPressed: (){
+                                if (_formKey.currentState!.validate()) {
+                                register();
+                              } else {
+                                print("fail");
+                              }
+                          },
+                          // padding: EdgeInsets.all(15.0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                             
                           ),
                           
-                          color: Color.fromARGB(255, 50, 50, 50),
-                          child: Text(
+                          // color: Color.fromARGB(255, 50, 50, 50),
+                          label: Text(
                             'RREGISTER',
                             style: TextStyle(
                               color: Colors.white,
@@ -431,11 +465,13 @@ class _BodyState extends State<Body> {
                               fontFamily: 'OpenSans',
                             ),
                             
+                            
                           ),
+                          backgroundColor:Color.fromARGB(255,50,50,50),
                         ),
                       ),
                     ),
-                  ),
+                  
                 ],
               ),
             ),

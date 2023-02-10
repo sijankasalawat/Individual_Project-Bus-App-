@@ -14,7 +14,7 @@ class ItemCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.only(bottom: 20,left: 20,right: 20),
       child: Container(
        
         
@@ -62,11 +62,11 @@ class ItemCart extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    product1[0].from,
+                    product.from,
                     style: TextStyle(color: Colors.grey[500]),
                   ),
                   Text(
-                    product1[0].to,
+                    product.to,
                     style: TextStyle(color: Colors.black),
                   )
                 ],
@@ -78,7 +78,7 @@ class ItemCart extends StatelessWidget {
                    Text("Time: ",style: TextStyle(color: Colors.black,
                     fontWeight: FontWeight.bold),),
                 
-                  Text(product1[0].time,style: TextStyle(color: Colors.black,
+                  Text(product.time,style: TextStyle(color: Colors.black,
                     fontWeight: FontWeight.bold))
                 ],
               ),
@@ -89,7 +89,7 @@ class ItemCart extends StatelessWidget {
                       children: [
                         TextSpan(text: "Price : ",style: TextStyle(color: Colors.black,
                         fontSize: 15,fontWeight: FontWeight.bold)),
-                        TextSpan(text:"Rs${product1[0].price}",style: TextStyle(color: Colors.black,
+                        TextSpan(text:"Rs${product.price}",style: TextStyle(color: Colors.black,
                         fontSize: 15,fontStyle: FontStyle.italic
                         ))
                     

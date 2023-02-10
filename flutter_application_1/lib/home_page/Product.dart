@@ -22,16 +22,14 @@ List<Product> product1=[
   Product(
     id: 1,
     no:10,
-    price: 2000, 
+    price: 12000, 
     from: "Kathmandu ",
     to:"Pokhara",
     time:"11:am",
     color: Color.fromARGB(255, 177, 184, 190),
-    
-
-  ),
+     ),
   Product(
-    id: 1,
+    id: 2,
     no:10,
     price: 2000, 
     from: "Kathmandu ",
@@ -45,6 +43,17 @@ List<Product> product1=[
     id: 1,
     no:10,
     price: 2000, 
+    from: "Kathmandu ",
+    to:"Pokhara",
+    time:"11:am",
+    color: Color.fromARGB(255, 177, 184, 190),
+    
+
+  ),
+    Product(
+    id: 1,
+    no:10,
+    price: 12000, 
     from: "Kathmandu ",
     to:"Pokhara",
     time:"11:am",

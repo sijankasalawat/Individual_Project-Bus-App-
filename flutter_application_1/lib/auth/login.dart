@@ -17,7 +17,10 @@ class _Login_pageState extends State<Login_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 15, 15, 15),
+    
+            //  backgroundColor: Image.asset('assets/images/buss.jpg',height: 100,).color,
+
+      backgroundColor: Color.fromARGB(255, 255, 226, 3),
       body: Body(),
     );
   }
@@ -62,8 +65,8 @@ class _BodyState extends State<Body> {
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [
-                    Color.fromARGB(255, 30, 30, 30),
-                    Color.fromARGB(255, 30, 30, 30),
+                    Color.fromARGB(255, 255, 255, 255),
+                    Color.fromARGB(255, 180, 180, 180),
                   ],
                 ),
                 borderRadius: BorderRadius.only(

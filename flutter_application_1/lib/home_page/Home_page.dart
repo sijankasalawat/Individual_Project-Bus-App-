@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/home_page/Product.dart';
+import 'package:flutter_application_1/home_page/vehicle.dart';
 import 'package:flutter_application_1/utilities/constants.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -89,7 +90,9 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
+      extendBodyBehindAppBar: true,
        backgroundColor: Image.asset('assets/images/highway.jpg').color,
       appBar: AppBar(
         toolbarHeight: 80,
@@ -98,7 +101,7 @@ class _HomepageState extends State<Homepage> {
        leading: IconButton(
           icon: Icon(
             Icons.menu,
-            color: Colors.black,
+            color: Color.fromARGB(255, 200, 200, 200),
           ),
           onPressed: () {
             _key.currentState?.openDrawer();
@@ -124,14 +127,15 @@ class _HomepageState extends State<Homepage> {
           //   ),
         ],
       ),
+     
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: <Widget>[
-            Body0(),
+            // Body0(),
             Body(),
             Body2(),
-            Body3(),
+            // Body3(),
           ],
         ),
       ),
@@ -160,16 +164,16 @@ class _HomepageState extends State<Homepage> {
   }
 }
 
-class Body0 extends StatelessWidget {
-  const Body0({super.key});
+// class Body0 extends StatelessWidget {
+//   const Body0({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
 
-    );
-  }
-}
+//     );
+//   }
+// }
 class Body extends StatefulWidget {
   const Body({super.key});
 
@@ -182,11 +186,17 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Color.fromARGB(255, 253, 238, 24)),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('assets/images/highway.jpg'),
+            fit: BoxFit.fill
+          )
+        
+      ),
       // scrollDirection:AxisDirection.vertical;
       // backgroundColor:Colors.red;
       child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20,top:120, bottom:80),
         child: Container(
           width: double.infinity,
           height: 150,
@@ -197,7 +207,7 @@ class _BodyState extends State<Body> {
               bottomRight: Radius.circular(20),
               bottomLeft: Radius.circular(20),
             ),
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: Color.fromARGB(108, 255, 255, 255),
           ),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
@@ -212,13 +222,13 @@ class _BodyState extends State<Body> {
                       children: <Widget>[
                         Text("Sijan Kasalawat",
                             style: TextStyle(
-                                color: Color.fromARGB(255, 0, 0, 0),
+                                color: Color.fromARGB(215, 40, 40, 40),
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold)),
                         Text(
                           "ID: 3339",
                           style: TextStyle(
-                              color: Colors.grey[600],
+                              color: Color.fromARGB(255, 40, 40, 40),
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                           textAlign: TextAlign.start,
@@ -226,7 +236,8 @@ class _BodyState extends State<Body> {
                       ],
                     )),
                     CircleAvatar(
-                        backgroundColor: Colors.grey.shade800,
+                        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+                          backgroundImage: AssetImage("assets/images/man.png"),
                         maxRadius: 30,
                         minRadius: 30
                         // backgroundImage: AssetImage("assets/images/bus_App_Logo.png"),
@@ -235,7 +246,7 @@ class _BodyState extends State<Body> {
                 ),
               ),
               Container(
-                color: Colors.blue,
+                // color: Colors.blue,
                 // height: max(10,10),
 
                 child: Padding(
@@ -274,16 +285,16 @@ class _Body2State extends State<Body2> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Color.fromARGB(255, 253, 238, 24)),
+      decoration: BoxDecoration(color: Color.fromARGB(255, 20, 46, 25)),
       // scrollDirection: Axis.vertical,
 
       child: Padding(
         padding: const EdgeInsets.only(
-          top: 20,
+          top: 0,
         ),
         child: Container(
           width: double.infinity,
-          height: 450,
+          height: 400,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),
@@ -314,19 +325,19 @@ class _Body2State extends State<Body2> {
 
               Categories(),
               // ignore: prefer_const_constructors
-              Expanded(
-                  child: GridView.builder(
+              // Expanded(
+              //     child: GridView.builder(
                     
-                itemCount: product1.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1,
-                  //height of ticket paper
-                  childAspectRatio: 2.2,
-                ),
-                itemBuilder: (context, index) => ItemCart(
-                  product: product1[index],
-                ),
-              ))
+              //   itemCount: product1.length,
+              //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //     crossAxisCount: 1,
+              //     //height of ticket paper
+              //     childAspectRatio: 2.5,
+              //   ),
+              //   itemBuilder: (context, index) => ItemCart(
+              //     product: product1[index],
+              //   ),
+              // ))
             ],
           ),
         ),
@@ -343,85 +354,81 @@ class Categories extends StatefulWidget {
 }
 
 class _CategoriesState extends State<Categories> {
-  List<String> categories = ["bus", "zeep", "superbus", "taxi"];
-  int selectedIndex = 0;
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 30,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
-        itemBuilder: (context, index) => buildCategory(index),
-      ),
-    );
-  }
-
-  Widget buildCategory(int index) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          // selectedIndex = Index(collectionGroup: collectionGroup, fields: fields, queryScope: queryScope)
-          // int selectedIndex = 0;
-          // final screen = [
-          //   ItemCart(
-          //     product: product1[index],
-          //   ),
-          //   ItemCart(
-          //     product: product1[index],
-          //   ),
-          //   ItemCart(
-          //     product: product1[index],
-          //   ),
-          //   ItemCart(
-          //     product: product1[index],
-          //   ),
-          // ];
-        });
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              categories[index],
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: selectedIndex == index ? kTextColor : kTextLightColor,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: kDefaultPaddin / 3), //top padding 5
-              height: 2,
-              width: 30,
-              color: selectedIndex == index
-                  ? Color.fromARGB(255, 8, 8, 8)
-                  : Color.fromARGB(0, 200, 32, 32),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Body3 extends StatefulWidget {
-  const Body3({super.key});
-
-  @override
-  State<Body3> createState() => _Body3State();
-}
-
-class _Body3State extends State<Body3> {
+  late Item item;
   @override
   Widget build(BuildContext context) {
     return Container(
+      
+      child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+        itemCount: item.length,
+        itemBuilder: (context, index) => Items(
+                item: Item1[index],
+                // press: () => Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         // builder: ((context) => Product_Detail(
+                //         //       product: product1[index],
+                //         //     )
+                //         //     )
+                //             )),
+              ),
+        ),
+      );
+   
+  }
+
+     
+    
+  
+}
+class Items extends StatelessWidget {
+  const Items({super.key, required Item item});
+
+  @override
+  Widget build(BuildContext context) {
+    var item;
+    return Container(
+      height: 50,
+      width: 50,
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 255, 255, 255),
+        borderRadius: BorderRadius.only(
+              topRight: Radius.circular(10),
+              bottomLeft: Radius.circular(10),
+            ),
       ),
-      width: double.infinity,
-      height: 30,
+      child: Column(
+        children: [
+         Row(
+          children: [
+            Text(item.title),
+            Image.asset(item.img,height: 30, width: 30,)
+          ],
+         )
+        ],
+      ),
+        
     );
   }
 }
+
+// class Body3 extends StatefulWidget {
+//   const Body3({super.key});
+
+//   @override
+//   State<Body3> createState() => _Body3State();
+// }
+
+// class _Body3State extends State<Body3> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       decoration: BoxDecoration(
+//         color: Color.fromARGB(255, 255, 255, 255),
+//       ),
+//       width: double.infinity,
+//       height: 30,
+//     );
+//   }
+// }
