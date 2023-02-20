@@ -95,18 +95,13 @@ class _HomepageState extends State<Homepage> {
       extendBodyBehindAppBar: true,
        backgroundColor: Image.asset('assets/images/highway.jpg').color,
       appBar: AppBar(
+           
+        
+      
         toolbarHeight: 80,
         backgroundColor: Colors.transparent,
         elevation: 0,
-       leading: IconButton(
-          icon: Icon(
-            Icons.menu,
-            color: Color.fromARGB(255, 200, 200, 200),
-          ),
-          onPressed: () {
-            _key.currentState?.openDrawer();
-          },
-        ),
+      
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.all(20),
@@ -136,6 +131,45 @@ class _HomepageState extends State<Homepage> {
             Body(),
             Body2(),
             // Body3(),
+          ],
+        ),
+      ),
+       drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text(
+                'Bus Ticketing App',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('My Account'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.credit_card),
+              title: Text('Payment'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.history),
+              title: Text('Booking History'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Logout'),
+              // onTap: signOut,
+            ),
           ],
         ),
       ),

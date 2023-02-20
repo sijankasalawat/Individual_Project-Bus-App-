@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 
 import '../main.dart';
 import '../models/user_model.dart';
+import '../services/localNotification.dart';
 import '../viewmodels/auth_viewmodel.dart';
 import '../viewmodels/global_ui_viewmodel.dart';
 
@@ -17,54 +19,56 @@ class Register_Page extends StatefulWidget {
 }
 
 class _Register_PageState extends State<Register_Page> {
-  
-    TextEditingController fullname = new TextEditingController();
- 
-  TextEditingController password = new TextEditingController();
-  TextEditingController email = new TextEditingController();
-  TextEditingController phonenumber = new TextEditingController();
+   TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _fullnameController = TextEditingController();
+  TextEditingController _phoneNumberController = TextEditingController();
 
   bool _obscureTextPassword = true;
-  bool _obscureTextPasswordConfirm = true;
 
   late GlobalUIViewModel _ui;
   late AuthViewModel _authViewModel;
-  
-  get NotificationService => null;
 
-  void register() async{
-    if(_formKey.currentState == null || !_formKey.currentState!.validate()){
+  @override
+  void initState() {
+    _ui = Provider.of<GlobalUIViewModel>(context, listen: false);
+    _authViewModel = Provider.of<AuthViewModel>(context, listen: false);
+    super.initState();
+  }
+
+  void register() async {
+    if (_formKey.currentState == null || !_formKey.currentState!.validate()) {
       return;
     }
     _ui.loadState(true);
-    try{
-      
-    
-   
-      await _authViewModel.register(
-          UserModel(
-           fullname: fullname.text,
-           email: email.text,
-           phone: phonenumber.text,
-           password: password.text,
-          )).then((value) {
-
-            NotificationService.display(
-              title: "Welcome to this app",
-              body: "Hello ${_authViewModel.loggedInUser?.fullname},\n Thank you for registering in this application.",
-            );
-            Navigator.of(context).pushReplacementNamed("/dashboard");
-      })
-          .catchError((e){
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message.toString())));
+    try {
+      await _authViewModel
+          .register(UserModel(
+              email: _emailController.text,
+              password: _passwordController.text,
+              phone: _phoneNumberController.text,
+              fullname: _fullnameController.text,
+              ))
+          .then((value) {
+        NotificationService.display(
+          title: "Welcome to this app",
+          body:
+              "Hello ${_authViewModel.loggedInUser?.fullname},\n Thank you for registering in this application.",
+        );
+        Navigator.of(context).pushReplacementNamed("/dashboard");
+      }).catchError((e) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(e.message.toString())));
       });
-    }catch(err){
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(err.toString())));
+    } catch (err) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(err.toString())));
     }
     _ui.loadState(false);
   }
-   
+
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,6 +98,16 @@ class _BodyState extends State<Body> {
   bool _obscureText = true;
    bool _isObscure = true;
    bool _changeButton = false;
+   
+     get _fullnameController => null;
+     
+       get _emailController => null;
+       
+         get _obscureTextPassword => null;
+         
+           TextEditingController? get _passwordController => null;
+           
+             set _obscureTextPasswordConfirm(bool _obscureTextPasswordConfirm) {}
   void inContact(TapDownDetails details) {
     setState(() {
       invisible = false;
@@ -199,7 +213,9 @@ class _BodyState extends State<Body> {
                           height: 50.0,
 
                           child: TextFormField(
-                            keyboardType: TextInputType.emailAddress,
+                            controller: _fullnameController,
+                    validator: ValidateSignup.username,
+                    keyboardType: TextInputType.text,
                             style: TextStyle(
                               color: Color.fromARGB(255, 255, 255, 255),
                               fontFamily: 'OpenSans',
@@ -226,13 +242,7 @@ class _BodyState extends State<Body> {
 
                               // hintStyle: kHintTextStyle,
                             ),
-                                 validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Full Name cannot be empty";
-                              }
-
-                              return null;
-                            },
+                              
                           ),
                         ),
                       ],
@@ -258,7 +268,9 @@ class _BodyState extends State<Body> {
                           height: 50.0,
 
                           child: TextFormField(
-                            keyboardType: TextInputType.emailAddress,
+                             controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    validator: ValidateSignup.emailValidate,
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'OpenSans',
@@ -278,14 +290,7 @@ class _BodyState extends State<Body> {
                             fontFamily: 'OpenSans',
                             ),
                             ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Email cannot be empty";
-                              } else if (!value.contains("@")) {
-                                return "Please enter a valid email address";
-                              }
-                              return null;
-                            },
+                           
                           ),
                         ),
                       ],
@@ -314,7 +319,7 @@ class _BodyState extends State<Body> {
                           
 
                           child: TextFormField(
-                            keyboardType: TextInputType.emailAddress,
+                           
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'OpenSans',
@@ -366,58 +371,45 @@ class _BodyState extends State<Body> {
                           height: 10.0,
                         ),
                         Container(
-                          alignment: Alignment.centerLeft,
-                          // decoration: kBoxDecorationStyle,
-                          height: 50.0,
+  alignment: Alignment.centerLeft,
+  // decoration: kBoxDecorationStyle,
+  height: 50.0,
+  child: TextFormField(
+    obscureText: _obscureTextPassword,
+    validator: (String? value) =>
+      ValidateSignup.password(value, _passwordController!),
+    style: TextStyle(
+      color: Colors.white,
+      fontFamily: 'OpenSans',
+    ),
+    decoration: InputDecoration(
+      border: InputBorder.none,
+      filled: true,
+      fillColor: Colors.grey[500],
+      contentPadding: EdgeInsets.only(top: 15.0),
+      prefixIcon: Icon(
+        Icons.lock,
+        color: Colors.white,
+      ),
+      suffixIcon: IconButton(
+        icon: Icon(
+          _obscureTextPassword ? Icons.visibility : Icons.visibility_off,
+        ),
+        onPressed: () {
+          setState(() {
+      //  _obscureTextPassword = !_obscureTextPassword;
+          });
+        },
+      ),
+      hintText: 'Enter your Password',
+      hintStyle: TextStyle(
+        color: Colors.grey[200],
+        fontFamily: 'OpenSans',
+      ),
+    ),
+  ),
+),
 
-                          child: TextFormField(
-                            obscureText: _isObscure,
-                            keyboardType: TextInputType.emailAddress,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'OpenSans',
-                            ),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              filled: true, //<-- SEE HERE
-                              fillColor: Colors.grey[500],
-                              contentPadding: EdgeInsets.only(top: 15.0),
-                               prefixIcon: Icon(
-                                Icons.lock,
-                                color: Colors.white,
-                              ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _isObscure ? Icons.visibility:Icons.visibility_off
-                                ),
-                                onPressed: (() {
-                                  
-                                  SetState:((){
-                                    _isObscure=!_isObscure;
-
-                                  });
-                                }),
-                                //   validator: (val) => val.length < 6 ? 'Password too short.' : null,
-                                // onSaved: (val) => _password = val,
-
-                                //   obscureText: _obscureText,
-                              ),
-                              hintText: 'Enter your Password',
-                              hintStyle:TextStyle(
-                              color: Colors.grey[200],
-                            fontFamily: 'OpenSans',
-                            ),
-                            ),
-                              validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Password cannot be empty";
-                              } else if (value.length < 6) {
-                                return "Password length should be atleast 6 charachter";
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
                         // GestureDetector(
                         //   onTapDown:
                         //       inContact, //call this method when incontact
@@ -439,36 +431,23 @@ class _BodyState extends State<Body> {
                         padding: EdgeInsets.symmetric(vertical: 25.0),
                         
                         width: double.infinity,
-                        child: FloatingActionButton.extended(
-                          elevation: 5.0,
-                          onPressed: (){
-                                if (_formKey.currentState!.validate()) {
-                                register();
-                              } else {
-                                print("fail");
-                              }
-                          },
-                          // padding: EdgeInsets.all(15.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                            
-                          ),
-                          
-                          // color: Color.fromARGB(255, 50, 50, 50),
-                          label: Text(
-                            'RREGISTER',
-                            style: TextStyle(
-                              color: Colors.white,
-                              letterSpacing: 1.5,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'OpenSans',
-                            ),
-                            
-                            
-                          ),
-                          backgroundColor:Color.fromARGB(255,50,50,50),
+                        child: ElevatedButton(
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      side: BorderSide(color: Colors.blue))),
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                              EdgeInsets.symmetric(vertical: 20)),
                         ),
+                        onPressed: () {
+                          register();
+                        },
+                        child: Text(
+                          "Sign Up",
+                          style: TextStyle(fontSize: 20),
+                        )),
                       ),
                     ),
                   
@@ -479,5 +458,56 @@ class _BodyState extends State<Body> {
         ],
       ),
     );
+  }
+}
+
+void register() async{
+  
+}
+class ValidateSignup {
+  static String? name(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Name is required";
+    }
+    return null;
+  }
+
+  static String? emailValidate(String? value) {
+    final RegExp emailValid = RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    if (value == null || value.isEmpty) {
+      return "Email is required";
+    }
+    if (!emailValid.hasMatch(value)) {
+      return "Please enter a valid email";
+    }
+    return null;
+  }
+
+  static String? phone(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Phone number is required";
+    }
+    return null;
+  }
+
+  static String? username(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Username is required";
+    }
+    return null;
+  }
+
+  static String? password(String? value, TextEditingController otherPassword) {
+    if (value == null || value.isEmpty) {
+      return "Password is required";
+    }
+    if (value.length < 8) {
+      return "Password should be at least 8 character";
+    }
+    if (otherPassword.text != value) {
+      return "Please make sure both the password are the same";
+    }
+    return null;
   }
 }

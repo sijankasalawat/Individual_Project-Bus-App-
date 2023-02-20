@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/home_page/Home_page.dart';
 import 'package:flutter_application_1/auth/login.dart';
 import 'package:flutter_application_1/auth/register.dart';
+// import 'package:flutter_application_1/home_page/newhomepage.dart';
 import 'package:flutter_application_1/viewmodels/auth_viewmodel.dart';
 import 'package:flutter_application_1/viewmodels/global_ui_viewmodel.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -46,9 +47,7 @@ class MyApp extends StatelessWidget {
         Hello.LoginRoute:(context) => Login_page(),
         Hello.RegisterRoute:(context) => Register_Page(),
         Hello.HomeRoute:((context) => Homepage()),
-      
-        
-
+        // Hello.NewHomeRoute:((context) => NewHomePage())
       
 
       },
@@ -58,22 +57,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
-    // return MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   initialRoute: "/Login",
-    //   routes: {
-    //     "/":(context) => Login_page(),
-    //     Hello.LoginRoute:(context) => Login_page(),
-    //     Hello.RegisterRoute:(context) => Register_Page(),
-    //     Hello.HomeRoute:((context) => Homepage()),
-      
-        
-
-      
-
-    //   },
-   
-    // );
+ 
   }
 }
 
@@ -81,6 +65,7 @@ class Hello{
   static String LoginRoute="/Login";
   static String RegisterRoute="/Register";
   static String HomeRoute="/Home_Page";
+  static String NewHomeRoute  ="/NewHomePage";
   
 
 

@@ -86,7 +86,7 @@ class _BodyState extends State<Body> {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 35,
-                            color: Color.fromARGB(255, 255, 255, 255)),
+                            color: Color.fromARGB(255, 1, 1, 1)),
                       ),
                     ],
                   ),
@@ -113,7 +113,7 @@ class _BodyState extends State<Body> {
                     children: <Widget>[
                       Text('EMAIL',
                           style:
-                              TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 18)
+                              TextStyle(color: Color.fromARGB(255, 30, 30, 30), fontSize: 18)
                           // style: kLabelStyle,
                           ),
                       SizedBox(
@@ -168,7 +168,7 @@ class _BodyState extends State<Body> {
                     children: <Widget>[
                       Text('PASSWORD',
                           style:
-                              TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 18)
+                              TextStyle(color: Color.fromARGB(255, 30, 30, 30), fontSize: 18)
                           // style: kLabelStyle,
                           ),
                       SizedBox(
@@ -232,7 +232,7 @@ class _BodyState extends State<Body> {
                           child: Text(
                             'Forgot Password?',
                             style: TextStyle(
-                              color: Color.fromARGB(255, 190, 190, 190),
+                              color: Color.fromARGB(255, 81, 80, 80),
                               fontSize:15.0,
                             ),
 
