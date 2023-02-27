@@ -49,6 +49,7 @@ dependencies:
   provider: ^6.0.5
   loader_overlay: ^2.1.0
   path_provider: ^2.0.11
+  google_fonts: ^4.0.3
  
 
 
@@ -63,10 +64,9 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   flutter_launcher_icons: ^0.11.0
-
 flutter_icons:
   android: "launcher_icon"
-  # ios: true
+  ios: true
   image_path: "assets/images/bus_App_logo.png"
 
 # For information on the generic Dart part of this file, see the

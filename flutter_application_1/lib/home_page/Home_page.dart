@@ -6,12 +6,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 // import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/auth/login.dart';
 import 'package:flutter_application_1/home_page/Product.dart';
 import 'package:flutter_application_1/home_page/vehicle.dart';
 import 'package:flutter_application_1/utilities/constants.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../product_detail/Product_Detail.dart';
 import 'ItemCart.dart';
+
 //Global variable for the notification plugin
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -25,9 +29,9 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
-  
+
   get _handleNavigationChange => null;
-   void showNotification() async {
+  void showNotification() async {
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
       "channelId",
@@ -90,18 +94,13 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       extendBodyBehindAppBar: true,
-       backgroundColor: Image.asset('assets/images/highway.jpg').color,
+      backgroundColor: Image.asset('assets/images/highway.jpg').color,
       appBar: AppBar(
-           
-        
-      
         toolbarHeight: 80,
         backgroundColor: Colors.transparent,
         elevation: 0,
-      
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.all(20),
@@ -122,7 +121,6 @@ class _HomepageState extends State<Homepage> {
           //   ),
         ],
       ),
-     
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
@@ -134,7 +132,7 @@ class _HomepageState extends State<Homepage> {
           ],
         ),
       ),
-       drawer: Drawer(
+      drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -142,12 +140,12 @@ class _HomepageState extends State<Homepage> {
               child: Text(
                 'Bus Ticketing App',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 32, 32, 32),
                   fontSize: 24,
                 ),
               ),
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Color.fromARGB(255, 255, 226, 3),
               ),
             ),
             ListTile(
@@ -161,39 +159,49 @@ class _HomepageState extends State<Homepage> {
               onTap: () {},
             ),
             ListTile(
+              leading: Icon(Icons.burst_mode),
+              title: Text('Ticket'),
+              onTap: () {},
+            ),
+            ListTile(
               leading: Icon(Icons.history),
               title: Text('Booking History'),
               onTap: () {},
             ),
             ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: Text('Logout'),
-              // onTap: signOut,
+              iconColor: Colors.white,
+              leading: const Icon(Icons.logout_outlined),
+              title:
+                  const Text('Logout', style: TextStyle(color: Colors.white)),
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: const Text("You pressed Logout"),
+                    content: const Text("Are you sure you want to logout?"),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('yes'),
+                        onPressed: () {
+                          Navigator.of(ctx).pop();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) => Login_page()));
+                        },
+                      ),
+                      TextButton(
+                        child: const Text('No'),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
           ],
         ),
       ),
-      // bottomNavigationBar: FluidNavBar(
-      //   // (1)
-      //   icons: [
-      //     // (2)
-      //     FluidNavBarIcon(
-      //       icon: Icons.home,
-      //     ),
-
-      //     FluidNavBarIcon(icon: Icons.message),
-      //     // FluidNavBarIcon(icon: Icons.home), // (3)
-      //     FluidNavBarIcon(icon: Icons.notifications),
-      //   ],
-      //   onChange: _handleNavigationChange,
-      //   style: FluidNavBarStyle(
-      //       barBackgroundColor: Color.fromARGB(255, 253, 238, 24),
-      //       iconBackgroundColor: Color.fromARGB(255, 0, 0, 0),
-      //       iconSelectedForegroundColor: Color.fromARGB(255, 255, 255, 255),
-      //       iconUnselectedForegroundColor: Colors.grey),
-      //   // onChange: _handleNavigationChange,                  // (4)
-      // ),
-     
     );
   }
 }
@@ -221,25 +229,22 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/images/highway.jpg'),
-            fit: BoxFit.fill
-          )
-        
-      ),
+          image: DecorationImage(
+              image: AssetImage('assets/images/highway.jpg'),
+              fit: BoxFit.fill)),
       // scrollDirection:AxisDirection.vertical;
       // backgroundColor:Colors.red;
       child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20,top:120, bottom:80),
+        padding:const EdgeInsets.only(left: 20, right: 20, top: 120, bottom: 80),
         child: Container(
           width: double.infinity,
           height: 150,
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-              bottomLeft: Radius.circular(20),
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+              bottomRight: Radius.circular(10),
+              bottomLeft: Radius.circular(10),
             ),
             color: Color.fromARGB(108, 255, 255, 255),
           ),
@@ -271,7 +276,7 @@ class _BodyState extends State<Body> {
                     )),
                     CircleAvatar(
                         backgroundColor: Color.fromARGB(255, 255, 255, 255),
-                          backgroundImage: AssetImage("assets/images/man.png"),
+                        backgroundImage: AssetImage("assets/images/man.png"),
                         maxRadius: 30,
                         minRadius: 30
                         // backgroundImage: AssetImage("assets/images/bus_App_Logo.png"),
@@ -299,11 +304,8 @@ class _BodyState extends State<Body> {
               ),
             ],
           ),
-         
         ),
-        
       ),
-
     );
   }
 }
@@ -316,6 +318,8 @@ class Body2 extends StatefulWidget {
 }
 
 class _Body2State extends State<Body2> {
+  get index => null;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -328,7 +332,7 @@ class _Body2State extends State<Body2> {
         ),
         child: Container(
           width: double.infinity,
-          height: 400,
+          clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),
@@ -336,7 +340,9 @@ class _Body2State extends State<Body2> {
               // bottomRight: Radius.circular(30),
               //  bottomLeft: Radius.circular(30),
             ),
-            color: Color.fromARGB(255, 255, 255, 255),
+            image: DecorationImage(
+                image: AssetImage("assets/images/bggg.png"),
+                fit: BoxFit.cover),
           ),
           child: Column(
             // ignore: prefer_const_literals_to_create_immutables
@@ -345,33 +351,69 @@ class _Body2State extends State<Body2> {
                 children: <Widget>[
                   Padding(
                     padding:
-                        const EdgeInsets.only(top: 20, left: 20, bottom: 10),
+                        const EdgeInsets.only(top: 20, left: 80, bottom: 10),
                     child: Text(
                       "AVALIABLE TICKETS",
                       style: TextStyle(
-                          color: Colors.grey[900],
+                          color: Color.fromARGB(255, 0, 0, 0),
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ],
               ),
-
-              Categories(),
-              // ignore: prefer_const_constructors
-              // Expanded(
-              //     child: GridView.builder(
-                    
-              //   itemCount: product1.length,
-              //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              //     crossAxisCount: 1,
-              //     //height of ticket paper
-              //     childAspectRatio: 2.5,
-              //   ),
-              //   itemBuilder: (context, index) => ItemCart(
-              //     product: product1[index],
-              //   ),
-              // ))
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.bus_alert_outlined,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      size:25,
+                    ),
+                    Text(
+                      "Avaliable ticket for Bus",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 0, 0, 0),fontSize: 18),
+                    )
+                  ],
+                ),
+              ),
+              Bus(
+                  press: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => Product_Detail(
+                                product: product1[index],
+                              ))))),
+              Padding(
+                padding: const EdgeInsets.only(left:10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.car_repair,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      size: 25,
+                    ),
+                    Text(
+                      "Avaliable ticket for Jeep",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 0, 0, 0)),
+                    )
+                  ],
+                ),
+              ),
+              Jeep(
+                  press: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => Product_Detail(
+                                product: product2[index],
+                              ))))),
             ],
           ),
         ),
@@ -380,89 +422,88 @@ class _Body2State extends State<Body2> {
   }
 }
 
-class Categories extends StatefulWidget {
-  const Categories({super.key});
+class Bus extends StatelessWidget {
+  final Function press;
+  const Bus({super.key, required this.press});
 
-  @override
-  State<Categories> createState() => _CategoriesState();
-}
-
-class _CategoriesState extends State<Categories> {
-  late Item item;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-      child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
-        itemCount: item.length,
-        itemBuilder: (context, index) => Items(
-                item: Item1[index],
-                // press: () => Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         // builder: ((context) => Product_Detail(
-                //         //       product: product1[index],
-                //         //     )
-                //         //     )
-                //             )),
-              ),
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Padding(
+        padding: const EdgeInsets.only(right: 10,left: 10),
+        child: Container(
+          height: 220,
+          child: Column(
+            children: [
+            
+              Expanded(
+                  child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                itemCount: product1.length,
+                // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                //   crossAxisCount: 2,
+                //   //height of ticket paper
+                //   childAspectRatio: 2.2,
+                // ),
+                itemBuilder: (context, index) => ItemCart(
+                  product: product1[index],
+                  press: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => Product_Detail(
+                                product: product1[index],
+                              )))),
+                ),
+              ))
+            ],
+          ),
         ),
-      );
-   
-  }
-
-     
-    
-  
-}
-class Items extends StatelessWidget {
-  const Items({super.key, required Item item});
-
-  @override
-  Widget build(BuildContext context) {
-    var item;
-    return Container(
-      height: 50,
-      width: 50,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-              topRight: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-            ),
       ),
-      child: Column(
-        children: [
-         Row(
-          children: [
-            Text(item.title),
-            Image.asset(item.img,height: 30, width: 30,)
-          ],
-         )
-        ],
-      ),
-        
     );
   }
 }
+class Jeep extends StatelessWidget {
+  final Function press;
+  const Jeep({super.key, required this.press});
 
-// class Body3 extends StatefulWidget {
-//   const Body3({super.key});
-
-//   @override
-//   State<Body3> createState() => _Body3State();
-// }
-
-// class _Body3State extends State<Body3> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       decoration: BoxDecoration(
-//         color: Color.fromARGB(255, 255, 255, 255),
-//       ),
-//       width: double.infinity,
-//       height: 30,
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Padding(
+        padding: const EdgeInsets.only(right: 10,left:10),
+        child: Container(
+          height: 220,
+          
+          child: Column(
+            children: [
+             
+              Expanded(
+                  child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                itemCount: product1.length,
+                // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                //   crossAxisCount: 2,
+                //   //height of ticket paper
+                //   childAspectRatio: 2.2,
+                // ),
+                itemBuilder: (context, index) => ItemCart(
+                  product: product2[index],
+                  press: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => Product_Detail(
+                                product: product2[index],
+                              )))),
+                ),
+              ))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

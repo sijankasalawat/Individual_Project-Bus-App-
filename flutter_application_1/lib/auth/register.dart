@@ -1,86 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:provider/provider.dart';
 
 import '../main.dart';
-import '../models/user_model.dart';
-import '../services/localNotification.dart';
-import '../viewmodels/auth_viewmodel.dart';
-import '../viewmodels/global_ui_viewmodel.dart';
 
 class Register_Page extends StatefulWidget {
   const Register_Page({super.key});
-  
-  
 
   @override
   State<Register_Page> createState() => _Register_PageState();
 }
 
 class _Register_PageState extends State<Register_Page> {
-   TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _fullnameController = TextEditingController();
-  TextEditingController _phoneNumberController = TextEditingController();
-
-  bool _obscureTextPassword = true;
-
-  late GlobalUIViewModel _ui;
-  late AuthViewModel _authViewModel;
-
-  @override
-  void initState() {
-    _ui = Provider.of<GlobalUIViewModel>(context, listen: false);
-    _authViewModel = Provider.of<AuthViewModel>(context, listen: false);
-    super.initState();
-  }
-
-  void register() async {
-    if (_formKey.currentState == null || !_formKey.currentState!.validate()) {
-      return;
-    }
-    _ui.loadState(true);
-    try {
-      await _authViewModel
-          .register(UserModel(
-              email: _emailController.text,
-              password: _passwordController.text,
-              phone: _phoneNumberController.text,
-              fullname: _fullnameController.text,
-              ))
-          .then((value) {
-        NotificationService.display(
-          title: "Welcome to this app",
-          body:
-              "Hello ${_authViewModel.loggedInUser?.fullname},\n Thank you for registering in this application.",
-        );
-        Navigator.of(context).pushReplacementNamed("/dashboard");
-      }).catchError((e) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(e.message.toString())));
-      });
-    } catch (err) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(err.toString())));
-    }
-    _ui.loadState(false);
-  }
-
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 15, 15, 15),
+        backgroundColor: Color.fromARGB(255, 253, 238, 24),
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 255, 255)),
+          icon: Icon(Icons.arrow_back, color: Colors.grey[900]),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 15, 15, 15),
+      backgroundColor: Color.fromARGB(255, 253, 238, 24),
       body: Body(),
     );
   }
@@ -98,16 +41,6 @@ class _BodyState extends State<Body> {
   bool _obscureText = true;
    bool _isObscure = true;
    bool _changeButton = false;
-   
-     get _fullnameController => null;
-     
-       get _emailController => null;
-       
-         get _obscureTextPassword => null;
-         
-           TextEditingController? get _passwordController => null;
-           
-             set _obscureTextPasswordConfirm(bool _obscureTextPasswordConfirm) {}
   void inContact(TapDownDetails details) {
     setState(() {
       invisible = false;
@@ -138,16 +71,12 @@ class _BodyState extends State<Body> {
           Container(
             margin: EdgeInsets.only(top: size.height * 0.0),
             width: 500,
-            height: size.height * 1.1,
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    Color.fromARGB(255, 255, 255, 255),
-                    Color.fromARGB(255, 181, 181, 181),
-                  ],
-                ),
+            height: size.height * 0.88,
+             decoration: BoxDecoration(
+               image: DecorationImage(
+                image: AssetImage("assets/images/bggg.png"),
+                fit: BoxFit.cover),
+          
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(50),
                   topRight: Radius.circular(50),
@@ -161,7 +90,7 @@ class _BodyState extends State<Body> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 35,
-                        color: Color.fromARGB(255, 255, 255, 255)),
+                        color: Colors.black),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
@@ -175,7 +104,7 @@ class _BodyState extends State<Body> {
                             TextSpan(
                               text: 'Already Registered? ',
                               style: TextStyle(
-                                color: Color.fromARGB(255, 170, 170, 170),
+                                color: Colors.grey[900],
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -201,7 +130,7 @@ class _BodyState extends State<Body> {
                       children: <Widget>[
                         Text('FULL NAME',
                             style:
-                                TextStyle(color: Colors.grey[600], fontSize: 18)
+                                TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 18)
                             // style: kLabelStyle,
                             ),
                         SizedBox(
@@ -212,20 +141,16 @@ class _BodyState extends State<Body> {
                           // decoration: kBoxDecorationStyle,
                           height: 50.0,
 
-                          child: TextFormField(
-                            controller: _fullnameController,
-                    validator: ValidateSignup.username,
-                    keyboardType: TextInputType.text,
+                          child: TextField(
+                            keyboardType: TextInputType.emailAddress,
                             style: TextStyle(
                               color: Color.fromARGB(255, 255, 255, 255),
                               fontFamily: 'OpenSans',
                             ),
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              filled: true, 
-                              //<-- SEE HERE
-                          
-                              fillColor: Colors.grey[500],
+                              filled: true, //<-- SEE HERE
+                              fillColor: Color.fromARGB(82, 3, 3, 3),
                               contentPadding: EdgeInsets.only(top: 15.0),
                               prefixIcon: Icon(
                                 Icons.person,
@@ -235,14 +160,10 @@ class _BodyState extends State<Body> {
                               hintStyle:TextStyle(
                               color: Colors.grey[200],
                             fontFamily: 'OpenSans',
-                            
                             ),
-
-                            
 
                               // hintStyle: kHintTextStyle,
                             ),
-                              
                           ),
                         ),
                       ],
@@ -256,7 +177,7 @@ class _BodyState extends State<Body> {
                       children: <Widget>[
                         Text('EMAIL',
                             style:
-                                TextStyle(color: Colors.grey[600], fontSize: 18)
+                                TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 18)
                             // style: kLabelStyle,
                             ),
                         SizedBox(
@@ -267,10 +188,8 @@ class _BodyState extends State<Body> {
                           // decoration: kBoxDecorationStyle,
                           height: 50.0,
 
-                          child: TextFormField(
-                             controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    validator: ValidateSignup.emailValidate,
+                          child: TextField(
+                            keyboardType: TextInputType.emailAddress,
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'OpenSans',
@@ -278,7 +197,7 @@ class _BodyState extends State<Body> {
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               filled: true, //<-- SEE HERE
-                              fillColor: Colors.grey[500],
+                              fillColor: Color.fromARGB(82, 3, 3, 3),
                               contentPadding: EdgeInsets.only(top: 15.0),
                               prefixIcon: Icon(
                                 Icons.email,
@@ -290,7 +209,6 @@ class _BodyState extends State<Body> {
                             fontFamily: 'OpenSans',
                             ),
                             ),
-                           
                           ),
                         ),
                       ],
@@ -304,11 +222,9 @@ class _BodyState extends State<Body> {
                       children: <Widget>[
                         Text('PHONE NUMBER',
                             style:
-                                TextStyle(color: Colors.grey[600], fontSize: 18),
-                           
+                                TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 18)
                             // style: kLabelStyle,
                             ),
-                           
                         SizedBox(
                           height: 10.0,
                         ),
@@ -316,19 +232,17 @@ class _BodyState extends State<Body> {
                           alignment: Alignment.centerLeft,
                           // decoration: kBoxDecorationStyle,
                           height: 50.0,
-                          
 
-                          child: TextFormField(
-                           
+                          child: TextField(
+                            keyboardType: TextInputType.emailAddress,
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'OpenSans',
                             ),
                             decoration: InputDecoration(
-                              // border: InputBorder.none,
-                              
+                              border: InputBorder.none,
                               filled: true, //<-- SEE HERE
-                              fillColor: Colors.grey[500],
+                              fillColor: Color.fromARGB(82, 3, 3, 3),
                               contentPadding: EdgeInsets.only(top: 15.0),
                               prefixIcon: Icon(
                                 Icons.phone,
@@ -339,18 +253,8 @@ class _BodyState extends State<Body> {
                               color: Colors.grey[200],
                             fontFamily: 'OpenSans',
                             ),
-                              //
                               // hintStyle: kHintTextStyle,
                             ),
-                                  validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Phone Number cannot be empty";
-                              } else if (value.length == 10) {
-                                return "Please enter a valid phone number";
-                              }
-                              return null;
-                            },
-                            
                           ),
                         ),
                       ],
@@ -364,52 +268,57 @@ class _BodyState extends State<Body> {
                       children: <Widget>[
                         Text('PASSWORD',
                             style:
-                                TextStyle(color: Colors.grey[600], fontSize: 18)
+                                TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 18)
                             // style: kLabelStyle,
                             ),
                         SizedBox(
                           height: 10.0,
                         ),
                         Container(
-  alignment: Alignment.centerLeft,
-  // decoration: kBoxDecorationStyle,
-  height: 50.0,
-  child: TextFormField(
-    obscureText: _obscureTextPassword,
-    validator: (String? value) =>
-      ValidateSignup.password(value, _passwordController!),
-    style: TextStyle(
-      color: Colors.white,
-      fontFamily: 'OpenSans',
-    ),
-    decoration: InputDecoration(
-      border: InputBorder.none,
-      filled: true,
-      fillColor: Colors.grey[500],
-      contentPadding: EdgeInsets.only(top: 15.0),
-      prefixIcon: Icon(
-        Icons.lock,
-        color: Colors.white,
-      ),
-      suffixIcon: IconButton(
-        icon: Icon(
-          _obscureTextPassword ? Icons.visibility : Icons.visibility_off,
-        ),
-        onPressed: () {
-          setState(() {
-      //  _obscureTextPassword = !_obscureTextPassword;
-          });
-        },
-      ),
-      hintText: 'Enter your Password',
-      hintStyle: TextStyle(
-        color: Colors.grey[200],
-        fontFamily: 'OpenSans',
-      ),
-    ),
-  ),
-),
+                          alignment: Alignment.centerLeft,
+                          // decoration: kBoxDecorationStyle,
+                          height: 50.0,
 
+                          child: TextField(
+                            obscureText: _isObscure,
+                            keyboardType: TextInputType.emailAddress,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'OpenSans',
+                            ),
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              filled: true, //<-- SEE HERE
+                              fillColor: Color.fromARGB(82, 3, 3, 3),
+                              contentPadding: EdgeInsets.only(top: 15.0),
+                               prefixIcon: Icon(
+                                Icons.lock,
+                                color: Colors.white,
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _isObscure ? Icons.visibility:Icons.visibility_off
+                                ),
+                                onPressed: (() {
+                                  
+                                  SetState:((){
+                                    _isObscure=!_isObscure;
+
+                                  });
+                                }),
+                                //   validator: (val) => val.length < 6 ? 'Password too short.' : null,
+                                // onSaved: (val) => _password = val,
+
+                                //   obscureText: _obscureText,
+                              ),
+                              hintText: 'Enter your Password',
+                              hintStyle:TextStyle(
+                              color: Colors.grey[200],
+                            fontFamily: 'OpenSans',
+                            ),
+                            ),
+                          ),
+                        ),
                         // GestureDetector(
                         //   onTapDown:
                         //       inContact, //call this method when incontact
@@ -426,31 +335,40 @@ class _BodyState extends State<Body> {
                   Padding(
                     padding:
                         const EdgeInsets.only(right: 30, left: 30, top: 30),
-     
+                    child: InkWell(
+                      onTap: (() {
+                        setState(() {
+                          _changeButton=true;
+                        });
+                      }),
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 25.0),
-                        
                         width: double.infinity,
-                        child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                      side: BorderSide(color: Colors.blue))),
-                          padding: MaterialStateProperty.all<EdgeInsets>(
-                              EdgeInsets.symmetric(vertical: 20)),
+                        child: MaterialButton(
+                          elevation: 5.0,
+                          onPressed: () => print('register Button Pressed'),
+                          padding: EdgeInsets.all(15.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            
+                          ),
+                          
+                          color: Colors.grey[900],
+                          child: Text(
+                            'RREGISTER',
+                            style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 1.5,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'OpenSans',
+                            ),
+                            
+                          ),
                         ),
-                        onPressed: () {
-                          register();
-                        },
-                        child: Text(
-                          "Sign Up",
-                          style: TextStyle(fontSize: 20),
-                        )),
                       ),
                     ),
-                  
+                  ),
                 ],
               ),
             ),
@@ -458,56 +376,5 @@ class _BodyState extends State<Body> {
         ],
       ),
     );
-  }
-}
-
-void register() async{
-  
-}
-class ValidateSignup {
-  static String? name(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Name is required";
-    }
-    return null;
-  }
-
-  static String? emailValidate(String? value) {
-    final RegExp emailValid = RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-    if (value == null || value.isEmpty) {
-      return "Email is required";
-    }
-    if (!emailValid.hasMatch(value)) {
-      return "Please enter a valid email";
-    }
-    return null;
-  }
-
-  static String? phone(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Phone number is required";
-    }
-    return null;
-  }
-
-  static String? username(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Username is required";
-    }
-    return null;
-  }
-
-  static String? password(String? value, TextEditingController otherPassword) {
-    if (value == null || value.isEmpty) {
-      return "Password is required";
-    }
-    if (value.length < 8) {
-      return "Password should be at least 8 character";
-    }
-    if (otherPassword.text != value) {
-      return "Please make sure both the password are the same";
-    }
-    return null;
   }
 }

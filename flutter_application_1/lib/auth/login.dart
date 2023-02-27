@@ -59,16 +59,12 @@ class _BodyState extends State<Body> {
           ),
           Container(
             margin: EdgeInsets.only(top: size.height * 0.1),
-            height: size.height * 0.85,
+            height: 500,
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    Color.fromARGB(255, 255, 255, 255),
-                    Color.fromARGB(255, 180, 180, 180),
-                  ],
-                ),
+               image: DecorationImage(
+                image: AssetImage("assets/images/bggg.png"),
+                fit: BoxFit.cover),
+          
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(50),
                   topRight: Radius.circular(50),
@@ -99,7 +95,7 @@ class _BodyState extends State<Body> {
                       Text(
                         "sign in to continue.",
                         style: TextStyle(
-                          color: Color.fromARGB(255, 144, 144, 144),
+                          color: Color.fromARGB(255, 53, 53, 53),
                           fontSize: 18,
                         ),
                       ),
@@ -144,7 +140,7 @@ class _BodyState extends State<Body> {
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             filled: true, //<-- SEE HERE
-                            fillColor: Colors.grey[500],
+                            fillColor: Color.fromARGB(82, 3, 3, 3),
                             contentPadding: EdgeInsets.only(top: 15.0),
                             prefixIcon: Icon(
                               Icons.email,
@@ -190,7 +186,7 @@ class _BodyState extends State<Body> {
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               filled: true, //<-- SEE HERE
-                              fillColor: Colors.grey[500],
+                              fillColor:  Color.fromARGB(82, 3, 3, 3),
                               contentPadding: EdgeInsets.only(top: 15.0),
                                prefixIcon: Icon(
                                 Icons.lock,
@@ -290,7 +286,7 @@ class _BodyState extends State<Body> {
                               TextSpan(
                                 text: 'Don\'t have an Account? ',
                                 style: TextStyle(
-                                  color:Color.fromARGB(255, 170, 170, 170) ,
+                                  color:Color.fromARGB(255, 10, 10, 10) ,
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w400,
                                 ),
@@ -298,7 +294,7 @@ class _BodyState extends State<Body> {
                               TextSpan(
                                 text: 'Sign Up',
                                 style: TextStyle(
-                                  color: Color.fromARGB(255, 190, 190, 190),
+                                  color: Color.fromARGB(255, 70, 70, 70),
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,
                                 ),
