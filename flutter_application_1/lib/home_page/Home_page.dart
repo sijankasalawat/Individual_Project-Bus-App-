@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/auth/login.dart';
+import 'package:flutter_application_1/home_page/Billpage.dart';
 import 'package:flutter_application_1/home_page/Product.dart';
 import 'package:flutter_application_1/home_page/vehicle.dart';
 import 'package:flutter_application_1/utilities/constants.dart';
@@ -31,6 +32,8 @@ class _HomepageState extends State<Homepage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   get _handleNavigationChange => null;
+  
+  get product => null;
   void showNotification() async {
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
@@ -145,7 +148,7 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 255, 226, 3),
+                color: Colors.amber,
               ),
             ),
             ListTile(
@@ -164,9 +167,13 @@ class _HomepageState extends State<Homepage> {
               onTap: () {},
             ),
             ListTile(
-              leading: Icon(Icons.history),
-              title: Text('Booking History'),
-              onTap: () {},
+              leading: Icon(Icons.blinds_closed_sharp),
+              title: Text('Bill'),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => BillScreen(product: product, selectedSeats: [],),
+                        ));
+              },
             ),
             ListTile(
               iconColor: Colors.white,
@@ -341,7 +348,7 @@ class _Body2State extends State<Body2> {
               //  bottomLeft: Radius.circular(30),
             ),
             image: DecorationImage(
-                image: AssetImage("assets/images/bggg.png"),
+                image: AssetImage("assets/images/paper.jpg"),
                 fit: BoxFit.cover),
           ),
           child: Column(
@@ -351,7 +358,7 @@ class _Body2State extends State<Body2> {
                 children: <Widget>[
                   Padding(
                     padding:
-                        const EdgeInsets.only(top: 20, left: 80, bottom: 10),
+                        const EdgeInsets.only(top: 20, left: 110, bottom: 10),
                     child: Text(
                       "AVALIABLE TICKETS",
                       style: TextStyle(

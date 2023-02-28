@@ -34,7 +34,7 @@ class ItemCart extends StatelessWidget {
           
           decoration: BoxDecoration(
   
-            color:Color.fromARGB(180, 91, 91, 91),
+            color:Color.fromARGB(108, 254, 202, 46),
            
             boxShadow: [
               
@@ -46,7 +46,7 @@ class ItemCart extends StatelessWidget {
               
               children: <Widget>[
                 Container(
-                  height: 115,
+                  height: 125,
                   //  width:155,
                    child: Column(
                     children: [

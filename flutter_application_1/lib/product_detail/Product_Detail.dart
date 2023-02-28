@@ -18,12 +18,12 @@ class Product_Detail extends StatelessWidget {
     return  Scaffold(
       resizeToAvoidBottomInset:false,
       
-      backgroundColor: product.color,
+     
       appBar: AppBar(
-        backgroundColor: product.color,
+        backgroundColor: Color.fromARGB(154, 254, 202, 46),
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 255, 255)),
+          icon: Icon(Icons.arrow_back, color: Color.fromARGB(255, 0, 0, 0)),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -32,21 +32,7 @@ class Product_Detail extends StatelessWidget {
        
       ),
       
-      // bottomNavigationBar: CurvedNavigationBar(
-      //   backgroundColor: Color.fromARGB(255, 2, 5, 8),
-      //   items: <Widget>[
-      //     Icon(Icons.home),
-      //     Icon(Icons.chat),
-      //     Icon(Icons.shopping_cart),
-      //     Icon(
-      //       Icons.account_box,
-      //       size: 30,
-      //     ),
-      //   ],
-      //   onTap: (index) {
-      //     //Handle button ta
-      //   },
-      // ),
+
     );
 }
 }
