@@ -16,14 +16,14 @@ class _Register_PageState extends State<Register_Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 253, 238, 24),
+        backgroundColor: Color.fromARGB(255, 249, 214, 109),
         elevation: 0.0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.grey[900]),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 253, 238, 24),
+      backgroundColor: Color.fromARGB(255, 249, 214, 109),
       body: Body(),
     );
   }
@@ -128,11 +128,7 @@ class _BodyState extends State<Body> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('FULL NAME',
-                            style:
-                                TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 18)
-                            // style: kLabelStyle,
-                            ),
+                       
                         SizedBox(
                           height: 10.0,
                         ),
@@ -175,11 +171,7 @@ class _BodyState extends State<Body> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('EMAIL',
-                            style:
-                                TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 18)
-                            // style: kLabelStyle,
-                            ),
+                       
                         SizedBox(
                           height: 10.0,
                         ),
@@ -220,11 +212,7 @@ class _BodyState extends State<Body> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('PHONE NUMBER',
-                            style:
-                                TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 18)
-                            // style: kLabelStyle,
-                            ),
+                       
                         SizedBox(
                           height: 10.0,
                         ),
@@ -266,11 +254,7 @@ class _BodyState extends State<Body> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text('PASSWORD',
-                            style:
-                                TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 18)
-                            // style: kLabelStyle,
-                            ),
+                       
                         SizedBox(
                           height: 10.0,
                         ),

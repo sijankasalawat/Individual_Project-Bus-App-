@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/home_page/Home_page.dart';
 import 'package:flutter_application_1/home_page/Product.dart';
 
 class BillScreen extends StatelessWidget {
@@ -11,10 +12,23 @@ class BillScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(154, 254, 202, 46),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 255, 255)),
+          onPressed: () =>{
+           Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Homepage(),
+            ),)
+   
+          } ,
+        ),
+        backgroundColor: Color.fromARGB(255, 249, 214, 109),
         title: Text('Bill '),
       ),
-      body: Padding(
+      body: 
+      
+      Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +45,7 @@ class BillScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Product name: ${product.name}'),
+                    Text('${ product.route}  From ${product.from} To ${product.to} '),
                     SizedBox(height: 8.0),
                     Text('Price per seat: ${product.price}'),
                     SizedBox(height: 8.0),

@@ -23,9 +23,12 @@ class Product_Detail extends StatelessWidget {
         backgroundColor: Color.fromARGB(154, 254, 202, 46),
         elevation: 0.0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color.fromARGB(255, 0, 0, 0)),
+          icon: Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 255, 255)),
           onPressed: () => Navigator.of(context).pop(),
+          
         ),
+        title:  Text(product.route,style: TextStyle(color:Color.fromARGB(255, 255, 255, 255),fontWeight:FontWeight.w500,fontSize: 22),),
+
       ),
       
       body: Body (product: product, 

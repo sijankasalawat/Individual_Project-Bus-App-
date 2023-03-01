@@ -12,7 +12,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-    decoration: BoxDecoration(color: Color.fromARGB(154, 254, 202, 46)),
+    decoration: BoxDecoration(color: Color.fromARGB(188, 254, 202, 46)),
       
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -25,12 +25,11 @@ class Body extends StatelessWidget {
                 Image.asset(product.img)],
             ),
           ),
-          Text(product.route,style: TextStyle(color:Color.fromARGB(255, 255, 255, 255),fontWeight:FontWeight.w400,fontSize: 22),),
-
+         
           Padding(
-            padding: const EdgeInsets.only(top: 200),
+            padding: const EdgeInsets.only(top: 250),
             child: Container(
-              height:280,
+              height:350,
               width:double.infinity,
             
                decoration: BoxDecoration(
@@ -65,7 +64,10 @@ class Body extends StatelessWidget {
                     
                       Row(
                         children: [
-                          Text("Price : ${product.price}",style: TextStyle(fontWeight:FontWeight.bold,fontSize: 14,color: Colors.blue,fontStyle: FontStyle.italic))
+                          Padding(
+                            padding: const EdgeInsets.only(top:15),
+                            child: Text("Price : ${product.price}",style: TextStyle(fontWeight:FontWeight.bold,fontSize: 18,color: Color.fromARGB(255, 0, 0, 0),fontStyle: FontStyle.italic)),
+                          )
                         
                         ],
                       ),
@@ -73,7 +75,7 @@ class Body extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top:20),
+                            padding: const EdgeInsets.only(top:10),
                             child: OutlinedButton(
                               style: OutlinedButton.styleFrom(
                                 backgroundColor: Colors.black,
@@ -81,6 +83,7 @@ class Body extends StatelessWidget {
                               onPressed: (() {
                                  Navigator.push(context, MaterialPageRoute(
                             builder: (context) => BookingScreen(product:product,),
+
                         ));
                               }),
                               child: Text(

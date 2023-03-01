@@ -20,7 +20,7 @@ class _Login_pageState extends State<Login_page> {
     
             //  backgroundColor: Image.asset('assets/images/buss.jpg',height: 100,).color,
 
-      backgroundColor: Color.fromARGB(255, 255, 226, 3),
+      backgroundColor: Color.fromARGB(255, 249, 214, 109),
       body: Body(),
     );
   }
@@ -59,7 +59,7 @@ class _BodyState extends State<Body> {
           ),
           Container(
             margin: EdgeInsets.only(top: size.height * 0.1),
-            height: 500,
+            height: 390,
             decoration: BoxDecoration(
                image: DecorationImage(
                 image: AssetImage("assets/images/bggg.png"),
@@ -73,7 +73,7 @@ class _BodyState extends State<Body> {
               // mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(top: 35),
+                  padding: const EdgeInsets.only(top: 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -107,11 +107,7 @@ class _BodyState extends State<Body> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('EMAIL',
-                          style:
-                              TextStyle(color: Color.fromARGB(255, 30, 30, 30), fontSize: 18)
-                          // style: kLabelStyle,
-                          ),
+                     
                       SizedBox(
                         height: 10.0,
                         
@@ -162,11 +158,7 @@ class _BodyState extends State<Body> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('PASSWORD',
-                          style:
-                              TextStyle(color: Color.fromARGB(255, 30, 30, 30), fontSize: 18)
-                          // style: kLabelStyle,
-                          ),
+                     
                       SizedBox(
                         height: 10.0,
                       ),
@@ -237,7 +229,7 @@ class _BodyState extends State<Body> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(vertical: 25.0),
+                        padding: EdgeInsets.symmetric(vertical: 10.0),
                         
                         width: double.infinity,
                         child: MaterialButton(
